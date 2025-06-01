@@ -1,0 +1,683 @@
+/**
+ * 아야비드 발급키 관리 시스템 - 폼 페이지 스타일
+ * PSR-12 준수, 사용자 친화적 폼 디자인, 접근성 고려
+ * 
+ * @author 시스템 관리자
+ * @version 1.0.0
+ * @since 2025-06-01
+ */
+
+/* =====================================================
+   폼 레이아웃 및 구조
+   ===================================================== */
+
+/* 폼 컨테이너 */
+#licenseForm {
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    position: relative;
+}
+
+/* 섹션 제목 스타일 */
+.form-section-title {
+    color: #4e73df;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-bottom: 2px solid #e3e6f0;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.form-section-title i {
+    margin-right: 0.5rem;
+    color: #4e73df;
+}
+
+/* =====================================================
+   폼 필드 스타일링
+   ===================================================== */
+
+/* 라벨 스타일 */
+.form-label {
+    font-weight: 600;
+    color: #5a5c69;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.form-label.required::after {
+    content: ' *';
+    color: #e74a3b;
+    font-weight: bold;
+}
+
+/* 입력 필드 */
+.form-control,
+.form-select {
+    border: 2px solid #d1d3e2;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.1);
+    background-color: rgba(78, 115, 223, 0.02);
+    transform: translateY(-1px);
+}
+
+.form-control:hover:not(:focus),
+.form-select:hover:not(:focus) {
+    border-color: #5a67d8;
+    background-color: rgba(78, 115, 223, 0.01);
+}
+
+/* 입력 그룹 */
+.input-group {
+    position: relative;
+}
+
+.input-group .form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+
+.input-group .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 2px solid #d1d3e2;
+}
+
+.input-group .form-control:focus + .btn {
+    border-left-color: #4e73df;
+}
+
+/* 텍스트에어리어 */
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+/* =====================================================
+   라디오 버튼 및 체크박스 스타일
+   ===================================================== */
+
+/* 라디오 버튼 컨테이너 */
+.form-check {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    margin-bottom: 0.5rem;
+    border: 1px solid transparent;
+}
+
+.form-check:hover {
+    background-color: #f8f9fc;
+    border-color: #e3e6f0;
+}
+
+.form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+    border: 2px solid #d1d3e2;
+    transition: all 0.2s ease;
+}
+
+.form-check-input:checked {
+    background-color: #4e73df;
+    border-color: #4e73df;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+.form-check-input:focus {
+    outline: 2px solid #4e73df;
+    outline-offset: 2px;
+}
+
+.form-check-label {
+    font-weight: 500;
+    color: #5a5c69;
+    cursor: pointer;
+    user-select: none;
+    margin-left: 0.5rem;
+}
+
+.form-check-label small {
+    color: #858796;
+    font-weight: normal;
+}
+
+/* 선택된 라디오 버튼 스타일 */
+.form-check:has(.form-check-input:checked) {
+    background-color: rgba(78, 115, 223, 0.1);
+    border-color: #4e73df;
+    box-shadow: 0 2px 4px rgba(78, 115, 223, 0.15);
+}
+
+/* =====================================================
+   버튼 스타일링
+   ===================================================== */
+
+/* 기본 버튼 스타일 */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+    border-width: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* 주요 버튼 */
+.btn-primary {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    border-color: #4e73df;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(78, 115, 223, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #3c4bc6 100%);
+    border-color: #5a67d8;
+    box-shadow: 0 6px 12px rgba(78, 115, 223, 0.4);
+}
+
+/* 아웃라인 버튼 */
+.btn-outline-primary {
+    color: #4e73df;
+    border-color: #4e73df;
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background-color: #4e73df;
+    border-color: #4e73df;
+    color: #fff;
+}
+
+.btn-outline-secondary {
+    color: #858796;
+    border-color: #858796;
+    background: transparent;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #858796;
+    border-color: #858796;
+    color: #fff;
+}
+
+/* 로딩 상태 버튼 */
+.btn-loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn-loading .btn-text {
+    opacity: 0;
+}
+
+.btn-loading .spinner-border {
+    display: inline-block !important;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+}
+
+/* 버튼 그룹 */
+.btn-group .btn {
+    margin-right: 0.5rem;
+}
+
+.btn-group .btn:last-child {
+    margin-right: 0;
+}
+
+/* =====================================================
+   유효성 검사 스타일
+   ===================================================== */
+
+/* 유효한 필드 */
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: #1cc88a;
+    background-color: rgba(28, 200, 138, 0.05);
+    box-shadow: 0 0 0 0.2rem rgba(28, 200, 138, 0.1);
+}
+
+.form-control.is-valid:focus,
+.form-select.is-valid:focus {
+    box-shadow: 0 0 0 0.2rem rgba(28, 200, 138, 0.25);
+}
+
+/* 무효한 필드 */
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: #e74a3b;
+    background-color: rgba(231, 74, 59, 0.05);
+    box-shadow: 0 0 0 0.2rem rgba(231, 74, 59, 0.1);
+    animation: shake 0.5s ease-in-out;
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+    box-shadow: 0 0 0 0.2rem rgba(231, 74, 59, 0.25);
+}
+
+/* 피드백 메시지 */
+.valid-feedback {
+    display: block;
+    color: #1cc88a;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+.invalid-feedback {
+    display: block;
+    color: #e74a3b;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+.form-text {
+    color: #6c757d;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    line-height: 1.4;
+}
+
+.form-text i {
+    color: #4e73df;
+    margin-right: 0.25rem;
+}
+
+/* =====================================================
+   추가 관리 기능 카드 스타일
+   ===================================================== */
+
+/* 관리 기능 카드 */
+.card.border-warning {
+    border-width: 2px;
+    border-color: #f6c23e !important;
+}
+
+.card.border-info {
+    border-width: 2px;
+    border-color: #36b9cc !important;
+}
+
+.card-header.bg-warning {
+    background: linear-gradient(135deg, #f6c23e 0%, #e0a800 100%) !important;
+    color: #1f2937 !important;
+    font-weight: 600;
+}
+
+.card-header.bg-info {
+    background: linear-gradient(135deg, #36b9cc 0%, #258391 100%) !important;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+/* 통계 표시 */
+.text-center h4 {
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.text-center small {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* =====================================================
+   모달 스타일
+   ===================================================== */
+
+.modal-content {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+.modal-header {
+    border-bottom: 2px solid #e3e6f0;
+    border-radius: 0.75rem 0.75rem 0 0;
+    background: linear-gradient(135deg, #f8f9fc 0%, #fff 100%);
+    padding: 1.25rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    border-top: 2px solid #e3e6f0;
+    border-radius: 0 0 0.75rem 0.75rem;
+    background: #f8f9fc;
+    padding: 1rem 1.5rem;
+}
+
+.modal-title {
+    color: #3a3b45;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* 모달 내 폼 스타일 */
+.modal .form-check {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal .alert {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+}
+
+/* =====================================================
+   애니메이션
+   ===================================================== */
+
+/* 흔들기 애니메이션 */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* 페이드인 애니메이션 */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 슬라이드 애니메이션 */
+.slide-in {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* 펄스 애니메이션 */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* =====================================================
+   반응형 디자인
+   ===================================================== */
+
+@media (max-width: 768px) {
+    /* 폼 패딩 조정 */
+    .card-body {
+        padding: 1rem;
+    }
+    
+    /* 입력 필드 크기 조정 */
+    .form-control,
+    .form-select {
+        padding: 0.625rem 0.875rem;
+        font-size: 0.9rem;
+    }
+    
+    /* 버튼 크기 조정 */
+    .btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    /* 섹션 제목 */
+    .form-section-title {
+        font-size: 1rem;
+    }
+    
+    /* 라디오 버튼 */
+    .form-check {
+        padding: 0.5rem;
+    }
+    
+    /* 버튼 그룹 세로 배치 */
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .btn-group .btn {
+        margin-right: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    /* 카드 마진 조정 */
+    .card {
+        margin: 0.5rem;
+    }
+    
+    /* 입력 그룹 세로 배치 */
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .input-group .form-control {
+        border-radius: 0.5rem;
+        border-right: 2px solid #d1d3e2;
+        margin-bottom: 0.5rem;
+    }
+    
+    .input-group .btn {
+        border-radius: 0.5rem;
+        border-left: 2px solid #d1d3e2;
+    }
+    
+    /* 모달 조정 */
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .modal-body,
+    .modal-header,
+    .modal-footer {
+        padding: 1rem;
+    }
+    
+    /* 텍스트 크기 조정 */
+    .form-text {
+        font-size: 0.75rem;
+    }
+    
+    .invalid-feedback,
+    .valid-feedback {
+        font-size: 0.75rem;
+    }
+}
+
+/* =====================================================
+   접근성 및 고대비 모드
+   ===================================================== */
+
+/* 포커스 스타일 강화 */
+.form-control:focus,
+.form-select:focus,
+.btn:focus,
+.form-check-input:focus {
+    outline: 2px solid #4e73df;
+    outline-offset: 2px;
+}
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+    .form-control,
+    .form-select {
+        border: 2px solid #000;
+    }
+    
+    .form-control:focus,
+    .form-select:focus {
+        border: 2px solid #4e73df;
+        background-color: #fff;
+    }
+    
+    .btn {
+        border: 2px solid;
+    }
+    
+    .form-check-input {
+        border: 2px solid #000;
+    }
+    
+    .form-section-title {
+        border-bottom: 2px solid #000;
+    }
+}
+
+/* 모션 감소 설정 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =====================================================
+   다크 모드 지원
+   ===================================================== */
+
+@media (prefers-color-scheme: dark) {
+    #licenseForm {
+        background: #2d3748;
+    }
+    
+    .form-label {
+        color: #e2e8f0;
+    }
+    
+    .form-control,
+    .form-select {
+        background-color: #2d3748;
+        border-color: #4a5568;
+        color: #e2e8f0;
+    }
+    
+    .form-control:focus,
+    .form-select:focus {
+        background-color: #4a5568;
+        border-color: #63b3ed;
+    }
+    
+    .form-check {
+        background-color: transparent;
+    }
+    
+    .form-check:hover {
+        background-color: #4a5568;
+    }
+    
+    .form-check-label {
+        color: #e2e8f0;
+    }
+    
+    .form-text {
+        color: #a0aec0;
+    }
+    
+    .card {
+        background-color: #2d3748;
+        border-color: #4a5568;
+    }
+    
+    .card-header {
+        background-color: #4a5568;
+        border-bottom-color: #4a5568;
+    }
+    
+    .modal-content {
+        background-color: #2d3748;
+    }
+    
+    .modal-header,
+    .modal-footer {
+        background-color: #4a5568;
+        border-color: #4a5568;
+    }
+}
+
+/* =====================================================
+   인쇄 스타일
+   ===================================================== */
+
+@media print {
+    .btn,
+    .modal,
+    .card-header {
+        display: none !important;
+    }
+    
+    .form-control,
+    .form-select {
+        border: 1px solid #000;
+        background: transparent;
+        box-shadow: none;
+    }
+    
+    .card {
+        border: 1px solid #000;
+        box-shadow: none;
+        break-inside: avoid;
+    }
+    
+    .form-section-title {
+        border-bottom: 1px solid #000;
+        color: #000;
+    }
+    
+    .form-label {
+        color: #000;
+    }
+    
+    .form-text {
+        color: #666;
+    }
+}

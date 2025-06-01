@@ -1,0 +1,696 @@
+/**
+ * 아야비드 발급키 관리 시스템 - 대시보드 스타일
+ * PSR-12 준수, 현대적 관리자 UI, 반응형 디자인
+ * 
+ * @author 시스템 관리자
+ * @version 1.0.0
+ * @since 2025-06-01
+ */
+
+/* =====================================================
+   기본 레이아웃 및 타이포그래피
+   ===================================================== */
+
+.dashboard-body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fc;
+    color: #5a5c69;
+    line-height: 1.6;
+}
+
+.main-content {
+    margin-top: 76px; /* 네비게이션 바 높이 + 여백 */
+    padding: 20px 0;
+    min-height: calc(100vh - 76px);
+}
+
+/* =====================================================
+   네비게이션 바 스타일
+   ===================================================== */
+
+.navbar {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    margin: 0 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.navbar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+/* 알림 드롭다운 */
+.notification-dropdown {
+    min-width: 320px;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.notification-dropdown .dropdown-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e3e6f0;
+    transition: all 0.2s ease;
+}
+
+.notification-dropdown .dropdown-item:hover {
+    background-color: #f8f9fc;
+    transform: translateX(5px);
+}
+
+.notification-dropdown .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+/* =====================================================
+   통계 카드 디자인
+   ===================================================== */
+
+.stat-card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #fff 0%, #f8f9fc 100%);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--border-color, #e3e6f0);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.stat-card:hover::before {
+    width: 6px;
+}
+
+/* 테두리 색상 변형 */
+.border-left-primary::before {
+    --border-color: #4e73df;
+}
+
+.border-left-success::before {
+    --border-color: #1cc88a;
+}
+
+.border-left-info::before {
+    --border-color: #36b9cc;
+}
+
+.border-left-warning::before {
+    --border-color: #f6c23e;
+}
+
+.border-left-danger::before {
+    --border-color: #e74a3b;
+}
+
+.stat-card .card-body {
+    padding: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.stat-card .text-xs {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .h5 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: #3a3b45;
+}
+
+.stat-card .fa-2x {
+    font-size: 2.5rem;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover .fa-2x {
+    opacity: 0.5;
+    transform: scale(1.1);
+}
+
+/* =====================================================
+   카드 및 패널 스타일
+   ===================================================== */
+
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.card.shadow {
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #f8f9fc 0%, #fff 100%);
+    border-bottom: 1px solid #e3e6f0;
+    border-radius: 0.75rem 0.75rem 0 0 !important;
+    padding: 1rem 1.25rem;
+}
+
+.card-header h6 {
+    color: #3a3b45;
+    font-weight: 600;
+    margin: 0;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+/* =====================================================
+   차트 컨테이너
+   ===================================================== */
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    padding: 1rem;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* 차트 범례 커스터마이징 */
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.chart-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #5a5c69;
+}
+
+.chart-legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+/* =====================================================
+   테이블 스타일
+   ===================================================== */
+
+.table {
+    color: #5a5c69;
+    margin-bottom: 0;
+}
+
+.table th {
+    border-top: none;
+    border-bottom: 2px solid #e3e6f0;
+    font-weight: 600;
+    color: #3a3b45;
+    font-size: 0.875rem;
+    padding: 0.75rem;
+    background-color: #f8f9fc;
+}
+
+.table td {
+    border-top: 1px solid #e3e6f0;
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(78, 115, 223, 0.05);
+    transform: translateX(2px);
+    transition: all 0.2s ease;
+}
+
+.table-responsive {
+    border-radius: 0.5rem;
+    border: 1px solid #e3e6f0;
+}
+
+/* 테이블 내 코드 스타일 */
+.table code {
+    background-color: rgba(78, 115, 223, 0.1);
+    color: #4e73df;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* =====================================================
+   배지 및 상태 표시
+   ===================================================== */
+
+.badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    letter-spacing: 0.025em;
+}
+
+.badge.badge-sm {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* 상태 배지 색상 */
+.bg-success {
+    background-color: #1cc88a !important;
+}
+
+.bg-warning {
+    background-color: #f6c23e !important;
+}
+
+.bg-danger {
+    background-color: #e74a3b !important;
+}
+
+.bg-info {
+    background-color: #36b9cc !important;
+}
+
+.bg-primary {
+    background-color: #4e73df !important;
+}
+
+.bg-secondary {
+    background-color: #858796 !important;
+}
+
+/* =====================================================
+   버튼 스타일
+   ===================================================== */
+
+.btn {
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-width: 1px;
+    padding: 0.5rem 1rem;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    border-color: #4e73df;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #3c4bc6 100%);
+    border-color: #5a67d8;
+}
+
+.btn-outline-primary {
+    color: #4e73df;
+    border-color: #4e73df;
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background-color: #4e73df;
+    border-color: #4e73df;
+    color: #fff;
+}
+
+.btn-group .btn {
+    border-radius: 0.375rem;
+    margin-right: 0.25rem;
+}
+
+.btn-group .btn:last-child {
+    margin-right: 0;
+}
+
+/* =====================================================
+   활동 로그 스타일
+   ===================================================== */
+
+.activity-item {
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+}
+
+.activity-item:hover {
+    background-color: #f8f9fc;
+    transform: translateX(5px);
+}
+
+.activity-item:last-child {
+    border-bottom: none !important;
+}
+
+/* =====================================================
+   모달 스타일
+   ===================================================== */
+
+.modal-content {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+.modal-header {
+    border-bottom: 1px solid #e3e6f0;
+    border-radius: 0.75rem 0.75rem 0 0;
+    background: linear-gradient(135deg, #f8f9fc 0%, #fff 100%);
+}
+
+.modal-footer {
+    border-top: 1px solid #e3e6f0;
+    border-radius: 0 0 0.75rem 0.75rem;
+    background: #f8f9fc;
+}
+
+.form-check {
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+    margin-bottom: 0.5rem;
+}
+
+.form-check:hover {
+    background-color: #f8f9fc;
+}
+
+.form-check-input {
+    margin-top: 0.125rem;
+}
+
+.form-check-label {
+    font-weight: 500;
+    color: #5a5c69;
+    cursor: pointer;
+}
+
+/* =====================================================
+   반응형 디자인
+   ===================================================== */
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-top: 66px;
+        padding: 10px 0;
+    }
+    
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    
+    .stat-card .h5 {
+        font-size: 1.5rem;
+    }
+    
+    .stat-card .fa-2x {
+        font-size: 2rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-header {
+        padding: 0.75rem 1rem;
+    }
+    
+    .chart-container {
+        height: 250px;
+        padding: 0.5rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .notification-dropdown {
+        min-width: 280px;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-content {
+        padding: 5px 0;
+    }
+    
+    .stat-card .card-body {
+        padding: 1rem;
+    }
+    
+    .stat-card .h5 {
+        font-size: 1.25rem;
+    }
+    
+    .chart-container {
+        height: 200px;
+    }
+    
+    .btn-group .btn {
+        margin-right: 0.125rem;
+        padding: 0.375rem 0.75rem;
+    }
+    
+    .table th,
+    .table td {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .notification-dropdown {
+        min-width: 260px;
+    }
+}
+
+/* =====================================================
+   로딩 상태 및 애니메이션
+   ===================================================== */
+
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 스피너 애니메이션 */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* =====================================================
+   접근성 및 포커스 상태
+   ===================================================== */
+
+.btn:focus,
+.form-control:focus,
+.form-check-input:focus {
+    outline: 2px solid #4e73df;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+    .card,
+    .stat-card {
+        border: 2px solid #000;
+    }
+    
+    .table th,
+    .table td {
+        border-color: #000;
+    }
+    
+    .badge {
+        border: 1px solid #000;
+    }
+}
+
+/* 모션 감소 설정 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =====================================================
+   다크 모드 지원
+   ===================================================== */
+
+@media (prefers-color-scheme: dark) {
+    .dashboard-body {
+        background-color: #1a202c;
+        color: #e2e8f0;
+    }
+    
+    .card,
+    .stat-card {
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+        color: #e2e8f0;
+    }
+    
+    .card-header {
+        background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+        border-bottom-color: #4a5568;
+    }
+    
+    .table {
+        color: #e2e8f0;
+    }
+    
+    .table th {
+        background-color: #2d3748;
+        border-bottom-color: #4a5568;
+        color: #e2e8f0;
+    }
+    
+    .table td {
+        border-top-color: #4a5568;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: rgba(78, 115, 223, 0.1);
+    }
+    
+    .navbar {
+        background-color: #2d3748 !important;
+        border-bottom-color: #4a5568;
+    }
+    
+    .modal-content {
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .modal-header,
+    .modal-footer {
+        background-color: #4a5568;
+        border-color: #4a5568;
+    }
+}
+
+/* =====================================================
+   인쇄 스타일
+   ===================================================== */
+
+@media print {
+    .navbar,
+    .btn,
+    .modal {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-top: 0;
+    }
+    
+    .card {
+        border: 1px solid #000;
+        box-shadow: none;
+        break-inside: avoid;
+    }
+    
+    .stat-card {
+        break-inside: avoid;
+        margin-bottom: 1rem;
+    }
+    
+    .chart-container {
+        height: auto;
+    }
+}

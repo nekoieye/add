@@ -1,0 +1,784 @@
+/**
+ * 아야비드 발급키 관리 시스템 - 모니터링 페이지 스타일
+ * PSR-12 준수, 실시간 모니터링 UI, 데이터 시각화 최적화
+ * 
+ * @author 시스템 관리자
+ * @version 1.0.0
+ * @since 2025-06-01
+ */
+
+/* =====================================================
+   모니터링 대시보드 레이아웃
+   ===================================================== */
+
+/* 모니터링 페이지 기본 스타일 */
+.monitoring-container {
+    min-height: calc(100vh - 160px);
+    background: linear-gradient(135deg, #f8f9fc 0%, #f1f3f9 100%);
+}
+
+/* 실시간 상태 표시 */
+.realtime-indicator {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, #1cc88a 0%, #17a2b8 100%);
+    color: white;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    animation: pulse-glow 2s infinite;
+    box-shadow: 0 2px 4px rgba(28, 200, 138, 0.3);
+}
+
+.realtime-indicator::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    animation: blink 1s infinite;
+}
+
+/* 자동 새로고침 토글 */
+.form-check-input[type="checkbox"] {
+    width: 2.5rem;
+    height: 1.25rem;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: #1cc88a;
+    border-color: #1cc88a;
+    box-shadow: 0 0 0 0.2rem rgba(28, 200, 138, 0.25);
+}
+
+.form-check-label {
+    font-weight: 500;
+    color: #5a5c69;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* =====================================================
+   인증 이력 테이블 스타일
+   ===================================================== */
+
+/* 인증 이력 테이블 */
+#authHistoryTable {
+    font-size: 0.85rem;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+#authHistoryTable th {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.75rem 0.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(78, 115, 223, 0.3);
+}
+
+#authHistoryTable td {
+    padding: 0.625rem 0.5rem;
+    border-top: 1px solid #e3e6f0;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+}
+
+/* 인증 결과별 행 스타일 */
+.auth-record[data-result="SUCCESS"] {
+    border-left: 4px solid #1cc88a;
+    background: linear-gradient(90deg, rgba(28, 200, 138, 0.05) 0%, transparent 100%);
+}
+
+.auth-record[data-result="FAILED"] {
+    border-left: 4px solid #e74a3b;
+    background: linear-gradient(90deg, rgba(231, 74, 59, 0.05) 0%, transparent 100%);
+}
+
+.auth-record[data-result="BLOCKED"] {
+    border-left: 4px solid #f6c23e;
+    background: linear-gradient(90deg, rgba(246, 194, 62, 0.05) 0%, transparent 100%);
+}
+
+.auth-record:hover {
+    background: rgba(78, 115, 223, 0.08);
+    transform: translateX(2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 코드 스타일 */
+.auth-record code {
+    background: rgba(78, 115, 223, 0.1);
+    color: #4e73df;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* IP 주소 스타일 */
+.font-monospace {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.75rem;
+    color: #6c757d;
+    background: #f8f9fc;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+}
+
+/* =====================================================
+   DB 연결 상태 카드
+   ===================================================== */
+
+/* DB 상태 카드 */
+.db-status-card {
+    border: 2px solid #e3e6f0;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.db-status-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #e3e6f0;
+    transition: all 0.3s ease;
+}
+
+.db-status-card.status-success::before {
+    background: linear-gradient(180deg, #1cc88a 0%, #17a2b8 100%);
+    box-shadow: 0 0 10px rgba(28, 200, 138, 0.5);
+}
+
+.db-status-card.status-error::before {
+    background: linear-gradient(180deg, #e74a3b 0%, #c0392b 100%);
+    box-shadow: 0 0 10px rgba(231, 74, 59, 0.5);
+}
+
+.db-status-card.status-warning::before {
+    background: linear-gradient(180deg, #f6c23e 0%, #e0a800 100%);
+    box-shadow: 0 0 10px rgba(246, 194, 62, 0.5);
+}
+
+.db-status-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: #4e73df;
+}
+
+/* DB 이름 스타일 */
+.db-name {
+    font-weight: 700;
+    color: #3a3b45;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+/* 연결 시간 표시 */
+.connection-time {
+    font-size: 0.75rem;
+    color: #858796;
+    margin-top: 0.25rem;
+}
+
+.connection-time.fast {
+    color: #1cc88a;
+    font-weight: 600;
+}
+
+.connection-time.slow {
+    color: #f6c23e;
+    font-weight: 600;
+}
+
+.connection-time.very-slow {
+    color: #e74a3b;
+    font-weight: 600;
+}
+
+/* =====================================================
+   차트 컨테이너 스타일
+   ===================================================== */
+
+/* 차트 컨테이너 */
+.chart-container {
+    position: relative;
+    height: 350px;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.chart-container canvas {
+    border-radius: 0.5rem;
+}
+
+/* 차트 카드 헤더 */
+.chart-card .card-header {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    color: white;
+    border: none;
+    border-radius: 0.75rem 0.75rem 0 0;
+    padding: 1rem 1.25rem;
+}
+
+.chart-card .card-header h6 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* 차트 범례 커스터마이징 */
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.chart-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #5a5c69;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    background: rgba(78, 115, 223, 0.05);
+    transition: all 0.2s ease;
+}
+
+.chart-legend-item:hover {
+    background: rgba(78, 115, 223, 0.1);
+    transform: translateY(-1px);
+}
+
+.chart-legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* =====================================================
+   필터 섹션 스타일
+   ===================================================== */
+
+/* 필터 폼 */
+#filterForm {
+    background: #fff;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 1px solid #e3e6f0;
+}
+
+#filterForm .form-control,
+#filterForm .form-select {
+    border: 2px solid #d1d3e2;
+    border-radius: 0.5rem;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+#filterForm .form-control:focus,
+#filterForm .form-select:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.1);
+    transform: translateY(-1px);
+}
+
+/* 빠른 필터 버튼 */
+.quick-filter-buttons {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e3e6f0;
+}
+
+.quick-filter-buttons .btn {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 1rem;
+    padding: 0.375rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.quick-filter-buttons .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* =====================================================
+   통계 카드 강화
+   ===================================================== */
+
+/* 통계 카드 애니메이션 */
+.stat-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.stat-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.stat-card:hover::after {
+    opacity: 1;
+    animation: shimmer 1.5s ease-in-out;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 통계 숫자 애니메이션 */
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-number {
+    transform: scale(1.1);
+}
+
+/* =====================================================
+   실시간 업데이트 표시
+   ===================================================== */
+
+/* 업데이트 인디케이터 */
+.update-indicator {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: rgba(28, 200, 138, 0.9);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.update-indicator.show {
+    transform: translateX(0);
+}
+
+.update-indicator i {
+    animation: spin 1s linear infinite;
+}
+
+/* 마지막 업데이트 시간 */
+#lastRefreshTime {
+    font-size: 0.75rem;
+    color: #858796;
+    font-style: italic;
+    padding: 0.25rem 0.5rem;
+    background: rgba(78, 115, 223, 0.1);
+    border-radius: 0.375rem;
+    border: 1px solid rgba(78, 115, 223, 0.2);
+}
+
+/* =====================================================
+   반응형 디자인
+   ===================================================== */
+
+@media (max-width: 768px) {
+    /* 모바일 테이블 스크롤 */
+    .table-responsive {
+        max-height: 400px;
+        border: 1px solid #e3e6f0;
+        border-radius: 0.5rem;
+    }
+    
+    #authHistoryTable {
+        font-size: 0.75rem;
+        min-width: 700px;
+    }
+    
+    #authHistoryTable th,
+    #authHistoryTable td {
+        padding: 0.5rem 0.25rem;
+    }
+    
+    /* 차트 높이 조정 */
+    .chart-container {
+        height: 250px;
+        padding: 0.5rem;
+    }
+    
+    /* DB 상태 카드 */
+    .db-status-card {
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* 필터 폼 */
+    #filterForm {
+        padding: 1rem;
+    }
+    
+    #filterForm .form-control,
+    #filterForm .form-select {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    /* 통계 카드 */
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    /* 빠른 필터 버튼 */
+    .quick-filter-buttons .btn {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    /* 매우 작은 화면 */
+    .monitoring-container {
+        padding: 0.5rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .chart-container {
+        height: 200px;
+        padding: 0.25rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .db-name {
+        font-size: 0.9rem;
+    }
+    
+    /* 실시간 인디케이터 */
+    .realtime-indicator {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+    }
+    
+    /* 업데이트 인디케이터 */
+    .update-indicator {
+        top: 70px;
+        right: 10px;
+        font-size: 0.7rem;
+        padding: 0.375rem 0.75rem;
+    }
+}
+
+/* =====================================================
+   애니메이션
+   ===================================================== */
+
+/* 펄스 글로우 애니메이션 */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 2px 4px rgba(28, 200, 138, 0.3);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 4px 8px rgba(28, 200, 138, 0.5);
+        transform: scale(1.02);
+    }
+}
+
+/* 깜빡임 애니메이션 */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* 회전 애니메이션 */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 시머 애니메이션 */
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* 데이터 로딩 애니메이션 */
+.loading-data {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-data::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(78, 115, 223, 0.2),
+        transparent
+    );
+    animation: loading-sweep 1.5s infinite;
+}
+
+@keyframes loading-sweep {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* =====================================================
+   상태별 색상 시스템
+   ===================================================== */
+
+/* 성공 상태 */
+.status-success {
+    color: #1cc88a;
+    background: linear-gradient(135deg, rgba(28, 200, 138, 0.1) 0%, rgba(23, 162, 184, 0.1) 100%);
+}
+
+/* 경고 상태 */
+.status-warning {
+    color: #f6c23e;
+    background: linear-gradient(135deg, rgba(246, 194, 62, 0.1) 0%, rgba(224, 168, 0, 0.1) 100%);
+}
+
+/* 오류 상태 */
+.status-error {
+    color: #e74a3b;
+    background: linear-gradient(135deg, rgba(231, 74, 59, 0.1) 0%, rgba(192, 57, 43, 0.1) 100%);
+}
+
+/* 정보 상태 */
+.status-info {
+    color: #36b9cc;
+    background: linear-gradient(135deg, rgba(54, 185, 204, 0.1) 0%, rgba(37, 131, 145, 0.1) 100%);
+}
+
+/* =====================================================
+   고급 인터랙션
+   ===================================================== */
+
+/* 호버시 상세 정보 표시 */
+.hover-details {
+    position: relative;
+    cursor: help;
+}
+
+.hover-details::after {
+    content: attr(data-details);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+}
+
+.hover-details:hover::after {
+    opacity: 1;
+}
+
+/* 클릭 가능한 요소 */
+.clickable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clickable:hover {
+    transform: scale(1.05);
+}
+
+.clickable:active {
+    transform: scale(0.95);
+}
+
+/* =====================================================
+   접근성 및 고대비 모드
+   ===================================================== */
+
+@media (prefers-contrast: high) {
+    .auth-record {
+        border-left-width: 6px;
+    }
+    
+    .db-status-card {
+        border: 2px solid #000;
+    }
+    
+    .chart-container {
+        border: 2px solid #000;
+    }
+    
+    #authHistoryTable th {
+        background: #000;
+        color: #fff;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =====================================================
+   다크 모드 지원
+   ===================================================== */
+
+@media (prefers-color-scheme: dark) {
+    .monitoring-container {
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    }
+    
+    #authHistoryTable {
+        color: #e2e8f0;
+    }
+    
+    #authHistoryTable td {
+        border-top-color: #4a5568;
+    }
+    
+    .auth-record:hover {
+        background: rgba(99, 179, 237, 0.1);
+    }
+    
+    .db-status-card {
+        background: #2d3748;
+        border-color: #4a5568;
+        color: #e2e8f0;
+    }
+    
+    .chart-container {
+        background: #2d3748;
+    }
+    
+    #filterForm {
+        background: #2d3748;
+        border-color: #4a5568;
+    }
+    
+    .form-control,
+    .form-select {
+        background: #2d3748;
+        border-color: #4a5568;
+        color: #e2e8f0;
+    }
+    
+    .realtime-indicator {
+        background: linear-gradient(135deg, #68d391 0%, #4fd1c7 100%);
+    }
+}
+
+/* =====================================================
+   인쇄 스타일
+   ===================================================== */
+
+@media print {
+    .btn,
+    .form-check,
+    .realtime-indicator,
+    .update-indicator {
+        display: none !important;
+    }
+    
+    .chart-container {
+        height: auto;
+        background: #fff;
+        border: 1px solid #000;
+    }
+    
+    #authHistoryTable {
+        font-size: 0.6rem;
+    }
+    
+    #authHistoryTable th,
+    #authHistoryTable td {
+        border: 1px solid #000;
+        padding: 0.25rem;
+    }
+    
+    .auth-record {
+        border-left: 3px solid #000;
+        background: transparent;
+    }
+    
+    .db-status-card {
+        border: 1px solid #000;
+        background: #fff;
+        break-inside: avoid;
+    }
+}
